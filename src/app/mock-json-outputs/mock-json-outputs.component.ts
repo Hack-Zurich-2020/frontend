@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Filter } from '../models/filter';
 import { ApiService } from '../services/api.service';
 import { FoodIngquiryResponse } from '../models/food-ingquiry-response';
+import { Restaturant } from '../models/restaturant';
 
 @Component({
   selector: 'app-mock-json-outputs',
@@ -28,6 +29,9 @@ export class MockJsonOutputsComponent implements OnInit {
     this.initFoodCategroy();
     this.initNutritions();
     this.initRestaurantCategories();
+  }
+  getRestaturantforFoodID(foodID: number): Restaturant {
+    return this.foods.FRM[foodID.toString()];
   }
 
   changeFoodCategory(event: any) {

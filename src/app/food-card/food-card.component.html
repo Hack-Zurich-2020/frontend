@@ -19,5 +19,9 @@
   <div class="modal-body">
     <h6>Here are the details for {{ food.FI }} <span class="badge badge-secondary">CHF {{food.FP}}</span></h6>
     <p>Included Nutritions: <span *ngFor="let nut of food.NF | keyvalue"> {{ getNutrionName(nut.value)}}</span>
+<br>
+    <h5>Avaible in Resturant</h5>
+{{ restaurant.N }}
+
   </div>
 </ng-template>

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Food } from '../models/food';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../services/api.service';
+import { Restaturant } from '../models/restaturant';
 
 @Component({
   selector: 'app-food-card',
@@ -10,6 +11,7 @@ import { ApiService } from '../services/api.service';
 })
 export class FoodCardComponent implements OnInit {
 @Input() food: Food;
+@Input() restaurant: Restaturant;
 
   closeResult: string;
 
