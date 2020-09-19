@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { MockJsonOutputsComponent } from './mock-json-outputs/mock-json-outputs.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FoodCardComponent } from './food-card/food-card.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FoodCardComponent } from './food-card/food-card.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

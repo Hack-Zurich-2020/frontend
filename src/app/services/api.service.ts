@@ -14,4 +14,8 @@ export class ApiService {
   public postUserRequest(): Observable<FoodIngquiryResponse>  {
     return this.http.get<FoodIngquiryResponse>('assets/mock-food-inquiry-response.json');
   }
+
+  public getNutritions(): Observable<{}> {
+    return this.http.get<{}>('assets/nutritions.json');
+  }
 }

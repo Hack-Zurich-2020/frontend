@@ -1,8 +1,23 @@
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ food.FI }}</h5>
-    <p class="card-text">Price: {{ food.FP }}</p>
-    <p class="card-text">Nutrition:
-    <p *ngFor="let nut of food.NF | keyvalue">Key:{{ nut.key }} Value: {{ nut.value}}</p>
+<div class="col-sm-6">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ food.FI }}</h5>
+      <p class="card-text">CHF: {{ food.FP }}</p>
+      <button class="btn btn-sm btn-primary" (click)="open(mymodal)">Details</button>
+    </div>
   </div>
 </div>
+
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Details {{ food.FI }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h6>Here are the details for {{ food.FI }} <span class="badge badge-secondary">CHF {{food.FP}}</span></h6>
+    <p>Included Nutritions: <span *ngFor="let nut of food.NF | keyvalue"> {{ getNutrionName(nut.value)}}</span>
+  </div>
+</ng-template>

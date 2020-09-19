@@ -20,7 +20,9 @@
 <br><br>
 
 {{ foods | json}}
-  <app-food-card *ngFor="let foodItem of foods.F" [food]="foodItem"></app-food-card>
+  <div class="row">
+      <app-food-card *ngFor="let foodItem of foods.F" [food]="foodItem"></app-food-card>
+  </div>
 </div>
 
 
