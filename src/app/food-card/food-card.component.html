@@ -1,7 +1,7 @@
 <div class="col-sm-6">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">{{ food.FI }}</h5>
+      <h5 class="card-title">{{ food.FN }}</h5>
       <p class="card-text">CHF: {{ food.FP }}</p>
       <button class="btn btn-sm btn-primary" (click)="open(mymodal)">Details</button>
     </div>
@@ -11,17 +11,21 @@
 
 <ng-template #mymodal let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Details {{ food.FI }}</h4>
+    <h4 class="modal-title" id="modal-basic-title">Details {{ food.FN }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">×</span>
     </button>
   </div>
   <div class="modal-body">
-    <h6>Here are the details for {{ food.FI }} <span class="badge badge-secondary">CHF {{food.FP}}</span></h6>
-    <p>Included Nutritions: <span *ngFor="let nut of food.NF | keyvalue"> {{ getNutrionName(nut.value)}}</span>
-<br>
+    <h6>Price<br><span class="badge badge-secondary">CHF {{food.FP}}</span></h6>
+    <h6>Included Nutritions: <br><span class="badge badge-secondary" *ngFor="let nut of food.NF | keyvalue"> {{ getNutrionName(nut.value)}}</span></h6>
+    <h6>ingredients: </h6>
+    <h6 *ngFor="let ingridient of food.IN | keyvalue">{{ingridient.key}}<span class="badge badge-secondary">{{ingridient.value}}</span></h6>
+    <br>
     <h5>Avaible in Resturant</h5>
-    <h6>{{ restaurant.N }} <span class="badge badge-secondary" *ngFor="let catID of restaurant.RC">{{getRestaurantCategoryName(catID)}}</span></h6>
+    <h6>{{ restaurant.N }} <span class="badge badge-secondary" *ngFor="let catID of restaurant.RC">{{getRestaurantCategoryName(catID)}}</span>
+      <span class="badge badge-pill badge-primary">{{restaurant.D}}km away</span>
+    </h6>
 
 
   </div>

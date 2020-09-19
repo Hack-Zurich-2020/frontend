@@ -1,3 +1,5 @@
+<h5>Hi {{userID}}</h5>
+
 <label for="foodCategory">Choose a Foodcategory:</label><br>
 <select name="foodCategories" id="foodCategory" (change)="changeFoodCategory($event)">
   <option *ngFor="let foodCategory of foodCategoryFilterItem" value="{{foodCategory.value}}">{{ foodCategory.key }}</option>

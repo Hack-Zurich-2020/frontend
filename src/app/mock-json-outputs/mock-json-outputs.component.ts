@@ -3,6 +3,7 @@ import { Filter } from '../models/filter';
 import { ApiService } from '../services/api.service';
 import { FoodIngquiryResponse } from '../models/food-ingquiry-response';
 import { Restaturant } from '../models/restaturant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mock-json-outputs',
@@ -17,15 +18,18 @@ export class MockJsonOutputsComponent implements OnInit {
 
   public foods: FoodIngquiryResponse;
 
+  public userID: string;
+
   private selectedFoodCategory: number;
   private selectedNutrion: number;
   private selectedRestaturantCat: number;
 
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.getUserID();
     this.initFoodCategroy();
     this.initNutritions();
     this.initRestaurantCategories();
@@ -48,9 +52,14 @@ export class MockJsonOutputsComponent implements OnInit {
   }
 
   public hitSearch(): void {
-    this.apiService.postUserRequest().subscribe(data => {
+    this.apiService.postFoodInquire(this.userID).subscribe(data => {
       this.foods = data;
     });
+  }
+
+  private getUserID(): void {
+    // this.userID = history.state.userID;
+    this.userID = 'sgsag';
   }
 
   private initFoodCategroy(): void {

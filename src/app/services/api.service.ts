@@ -18,13 +18,13 @@ export class ApiService {
     return this.http.get<FoodIngquiryResponse>('assets/mock-food-inquiry-response.json');
   }
 
-  public postFoodInquire(): Observable<FoodIngquiryResponse> {
+  public postFoodInquire(userID): Observable<FoodIngquiryResponse> {
     const body = {
-      UI: 'ux09',
+      UI: userID,
       LO: 50.1,
       LA: 50
     };
-    return this.http.post<FoodIngquiryResponse>('http://0.tcp.ngrok.io:10604/food/inquire', body);
+    return this.http.post<FoodIngquiryResponse>('http://localhost:8080/food/inquire', body);
   }
 
   public getNutritions(): Observable<{}> {
