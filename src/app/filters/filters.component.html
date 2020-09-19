@@ -1,0 +1,15 @@
+<label for="foodCategory">Choose a Foodcategory:</label>
+<select name="foodCategories" id="foodCategory">
+  <option *ngFor="let foodCategory of foodCategoryFilterItem" value="{{foodCategory.value}}">{{ foodCategory.key }}</option>
+</select>
+
+<label for="foodCategory">Choose a Foodcategory:</label>
+<select name="nutritions" id="nutritions">
+  <option *ngFor="let nutrition of nutritionFilterItem" value="{{nutrition.value}}">{{ nutrition.key }}</option>
+</select>
+
+<select name="restaurantCategories" id="restaurantCategories">
+  <option *ngFor="let restaurantCategory of restaurantCategoryFilterItem" value="{{restaurantCategory.value}}">{{ restaurantCategory.key }}</option>
+</select>
+
+
