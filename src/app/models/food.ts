@@ -4,7 +4,7 @@ export class Food {
   // food price
   FP: number;
   // dictionary/map of nutrition facts
-  NF: [];
+  NF: {};
   // food amount
   FA: number;
 }

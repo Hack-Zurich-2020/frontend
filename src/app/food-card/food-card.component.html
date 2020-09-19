@@ -1,0 +1,8 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ food.FI }}</h5>
+    <p class="card-text">Price: {{ food.FP }}</p>
+    <p class="card-text">Nutrition:
+    <p *ngFor="let nut of food.NF | keyvalue">Key:{{ nut.key }} Value: {{ nut.value}}</p>
+  </div>
+</div>

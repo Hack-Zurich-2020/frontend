@@ -5,13 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MockJsonOutputsComponent } from './mock-json-outputs/mock-json-outputs.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FiltersComponent } from './filters/filters.component';
+import { FoodCardComponent } from './food-card/food-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MockJsonOutputsComponent,
-    FiltersComponent
+    FoodCardComponent
   ],
   imports: [
     BrowserModule,
