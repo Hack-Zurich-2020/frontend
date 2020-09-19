@@ -1,0 +1,38 @@
+<h1>Welcome to Fondue Platform - Order food, personlized!</h1>
+<form [formGroup]="registerForm" (ngSubmit)="onFormSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputUserID">UserID</label>
+      <input type="text" class="form-control" id="inputUserID" formControlName="ID">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="BLOOD_PRESSURE">BLOOD_PRESSURE</label>
+      <input type="number" class="form-control" id="BLOOD_PRESSURE" formControlName="BLOOD_PRESSURE">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="DIABETES">DIABETES</label>
+      <input type="number" class="form-control" id="DIABETES" placeholder="0(no) 1(yes)" formControlName="DIABETES">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="BMI">BMI</label>
+      <input type="number" class="form-control" id="BMI" placeholder="" formControlName="BMI">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="AGE">AGE</label>
+      <input type="number" class="form-control" id="AGE" placeholder="" formControlName="AGE">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="LACTOSE_ALLERGY">LACTOSE_ALLERGY</label>
+      <input type="number" class="form-control" id="LACTOSE_ALLERGY" placeholder="0(no) 1(yes)" formControlName="LACTOSE_ALLERGY">
+    </div>
+    <div class="form-group col-md-4">
+      <label for="HIGH_LDL">HIGH_LDL</label>
+      <input type="number" class="form-control" id="HIGH_LDL" placeholder="" formControlName="HIGH_LDL">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Order Food</button>
+</form>

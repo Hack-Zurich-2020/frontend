@@ -21,7 +21,8 @@
     <p>Included Nutritions: <span *ngFor="let nut of food.NF | keyvalue"> {{ getNutrionName(nut.value)}}</span>
 <br>
     <h5>Avaible in Resturant</h5>
-{{ restaurant.N }}
+    <h6>{{ restaurant.N }} <span class="badge badge-secondary" *ngFor="let catID of restaurant.RC">{{getRestaurantCategoryName(catID)}}</span></h6>
+
 
   </div>
 </ng-template>

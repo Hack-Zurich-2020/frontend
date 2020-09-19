@@ -16,11 +16,13 @@ export class FoodCardComponent implements OnInit {
   closeResult: string;
 
   private nutritions: {};
+  private restaurantCategories: {};
 
   constructor(private modalService: NgbModal, private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.getAllNutrions();
+    this.getAllRestaturantCategories();
   }
 
   open(content) {
@@ -44,10 +46,19 @@ export class FoodCardComponent implements OnInit {
   public getNutrionName(nutritionid: number): string {
     return this.nutritions[nutritionid];
   }
+  getRestaurantCategoryName(catID: number): string {
+    return this.restaurantCategories[catID];
+  }
 
   private getAllNutrions(): void {
     this.apiService.getNutritions().subscribe(data => {
    this.nutritions = data;
+    });
+  }
+
+  private getAllRestaturantCategories(): void {
+    this.apiService.getResturantCat().subscribe(data => {
+      this.restaurantCategories = data;
     });
   }
 

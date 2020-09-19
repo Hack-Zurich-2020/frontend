@@ -1,21 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FoodIngquiryResponse } from '../models/food-ingquiry-response';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  constructor(private http: HttpClient) { }
+  private headers: HttpHeaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
+
+  constructor(private http: HttpClient) {
+  }
 
 
-  public postUserRequest(): Observable<FoodIngquiryResponse>  {
+  public postUserRequest(): Observable<FoodIngquiryResponse> {
     return this.http.get<FoodIngquiryResponse>('assets/mock-food-inquiry-response.json');
+  }
+
+  public postFoodInquire(): Observable<FoodIngquiryResponse> {
+    const body = {
+      UI: 'ux09',
+      LO: 50.1,
+      LA: 50
+    };
+    return this.http.post<FoodIngquiryResponse>('http://0.tcp.ngrok.io:10604/food/inquire', body);
   }
 
   public getNutritions(): Observable<{}> {
     return this.http.get<{}>('assets/nutritions.json');
+  }
+
+  public getResturantCat(): Observable<{}> {
+    return this.http.get<{}>('assets/restaurant-categories.json');
+  }
+
+  public createUser(body: any): Observable<any> {
+    return this.http.post('http://localhost:8080/user/register', body, {headers: this.headers});
   }
 }
