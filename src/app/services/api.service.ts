@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private headers: HttpHeaders = new HttpHeaders().set('Access-Control-Allow-Origin', '*');
-
   constructor(private http: HttpClient) {
   }
 
@@ -36,6 +34,16 @@ export class ApiService {
   }
 
   public createUser(body: any): Observable<any> {
-    return this.http.post('http://localhost:8080/user/register', body, {headers: this.headers});
+    return this.http.post('http://localhost:8080/user/register', body);
+  }
+
+  public postOrderFood(userID: string, foodIDList: Array<number>): Observable<any> {
+    const body = {
+      FI: foodIDList,
+      UI: userID,
+      LO: 50.1,
+      LA: 50
+    };
+    return this.http.post('http://localhost:8080/food/order', body);
   }
 }

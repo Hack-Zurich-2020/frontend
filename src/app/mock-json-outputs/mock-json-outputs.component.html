@@ -1,29 +1,45 @@
-<h5>Hi {{userID}}</h5>
-
-<label for="foodCategory">Choose a Foodcategory:</label><br>
-<select name="foodCategories" id="foodCategory" (change)="changeFoodCategory($event)">
-  <option *ngFor="let foodCategory of foodCategoryFilterItem" value="{{foodCategory.value}}">{{ foodCategory.key }}</option>
-</select><br>
+<div class="row">
+  <div class="col-lg-12">
+    <h5>Hi {{userID}}</h5>
+    <button type="button" class="float-right btn btn-primary" (click)="orderFood()">
+      Order <span class="badge badge-light">({{ shoppingList.length.toString() }})</span>
+    </button>
+  </div>
+</div>
 
 
 <div *ngIf="foods">
 
-<label for="nutritions">Filter a Nutrition:</label><br>
-<select name="nutritions" id="nutritions" (change)="changeNutrition($event)">
-  <option *ngFor="let nutrition of nutritionFilterItem" value="{{nutrition.value}}">{{ nutrition.key }}</option>
-</select><br>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="foodCategory">Choose a Foodcategory:</label><br>
+      <select name="foodCategories" id="foodCategory" (change)="changeFoodCategory($event)" class="form-control">
+        <option value="-">-</option>
+        <option *ngFor="let foodCategory of foodCategoryFilterItem" value="{{foodCategory.value}}">{{ foodCategory.key }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="nutritions">Filter a Nutrition:</label><br>
+      <select name="nutritions" id="nutritions" (change)="changeNutrition($event)" class="form-control">
+        <option value="-">-</option>
+        <option *ngFor="let nutrition of nutritionFilterItem" value="{{nutrition.value}}">{{ nutrition.key }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="restaurantCategories">Filter a Restaturant Category:</label><br>
+      <select name="restaurantCategories" id="restaurantCategories" (change)="changeRestCat($event)" class="form-control">
+        <option value="-">-</option>
+        <option *ngFor="let restaurantCategory of restaurantCategoryFilterItem" value="{{restaurantCategory.value}}">{{ restaurantCategory.key }}</option>
+      </select>
+    </div>
+  </div>
 
-<label for="restaurantCategories">Filter a Restaturant Category:</label><br>
-<select name="restaurantCategories" id="restaurantCategories" (change)="changeRestCat($event)">
-  <option *ngFor="let restaurantCategory of restaurantCategoryFilterItem" value="{{restaurantCategory.value}}">{{ restaurantCategory.key }}</option>
-</select>
+  <br><br>
 
-
-<br><br>
-
-{{ foods | json}}
+  {{ foods | json}}
   <div class="row">
-      <app-food-card *ngFor="let foodItem of foods.F" [food]="foodItem" [restaurant]="getRestaturantforFoodID(foodItem.FI)"></app-food-card>
+    <app-food-card *ngFor="let foodItem of foods.F" [food]="foodItem" [restaurant]="getRestaturantforFoodID(foodItem.FI)"
+                   (addedFoodToBasket)="addFoodToShoppingList($event)"></app-food-card>
   </div>
 </div>
 

@@ -16,13 +16,16 @@ export class MockJsonOutputsComponent implements OnInit {
   public nutritionFilterItem: Filter[];
   public restaurantCategoryFilterItem: Filter[];
 
+
+  public shoppingList: Array<number> = [];
+
   public foods: FoodIngquiryResponse;
-
   public userID: string;
-
-  private selectedFoodCategory: number;
-  private selectedNutrion: number;
-  private selectedRestaturantCat: number;
+  private foodsBackup: FoodIngquiryResponse;
+  private test: number;
+  private selectedFoodCategory: any;
+  private selectedNutrion: any;
+  private selectedRestaturantCat: any;
 
 
   constructor(private apiService: ApiService, private router: Router) {
@@ -30,17 +33,19 @@ export class MockJsonOutputsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserID();
+    this.hitSearch();
     this.initFoodCategroy();
     this.initNutritions();
     this.initRestaurantCategories();
   }
+
   getRestaturantforFoodID(foodID: number): Restaturant {
     return this.foods.FRM[foodID.toString()];
   }
 
   changeFoodCategory(event: any) {
     this.selectedFoodCategory = event.target.value;
-    this.hitSearch();
+    this.filterAll();
   }
 
   changeNutrition(event: any) {
@@ -54,6 +59,17 @@ export class MockJsonOutputsComponent implements OnInit {
   public hitSearch(): void {
     this.apiService.postFoodInquire(this.userID).subscribe(data => {
       this.foods = data;
+    });
+  }
+
+  public addFoodToShoppingList(event): void {
+    console.log(event);
+    this.shoppingList.push(event);
+  }
+
+  public orderFood(): void {
+    this.apiService.postOrderFood(this.userID, this.shoppingList).subscribe(data => {
+      console.log(data);
     });
   }
 
@@ -102,6 +118,39 @@ export class MockJsonOutputsComponent implements OnInit {
       new Filter('KOSHER', 6)
     ];
     this.restaurantCategoryFilterItem = restaturantCategories;
+  }
+
+  private filterAll() {
+
+
+    this.apiService.postFoodInquire(this.userID).subscribe(data => {
+      if (this.selectedFoodCategory !== '-') {
+
+        this.filterFoodCategory(data);
+
+        this.foods = data;
+      } else {
+      this.foods = data; }
+    });
+
+
+  }
+
+  private filterFoodCategory(input: FoodIngquiryResponse): any {
+    const newOutput: FoodIngquiryResponse = Object.assign({}, input);
+
+    input.F.forEach((data, index) => {
+      console.log(data.FC.indexOf(this.selectedFoodCategory));
+      console.log(data.FC.includes(this.selectedFoodCategory));
+      if (!data.FC.indexOf(this.selectedFoodCategory)) {
+        console.log(data.FC);
+        newOutput.F.splice(index, 1);
+
+      }
+
+    });
+
+    return newOutput;
   }
 
 }

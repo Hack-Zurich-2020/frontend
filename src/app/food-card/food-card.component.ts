@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Food } from '../models/food';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../services/api.service';
@@ -12,6 +12,8 @@ import { Restaturant } from '../models/restaturant';
 export class FoodCardComponent implements OnInit {
 @Input() food: Food;
 @Input() restaurant: Restaturant;
+
+@Output() addedFoodToBasket: EventEmitter<number> = new EventEmitter<number>();
 
   closeResult: string;
 
@@ -60,6 +62,10 @@ export class FoodCardComponent implements OnInit {
     this.apiService.getResturantCat().subscribe(data => {
       this.restaurantCategories = data;
     });
+  }
+
+  public addToBasket(id: number): void {
+    this.addedFoodToBasket.emit(id);
   }
 
 }

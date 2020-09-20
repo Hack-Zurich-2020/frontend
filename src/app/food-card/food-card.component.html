@@ -4,6 +4,7 @@
       <h5 class="card-title">{{ food.FN }}</h5>
       <p class="card-text">CHF: {{ food.FP }}</p>
       <button class="btn btn-sm btn-primary" (click)="open(mymodal)">Details</button>
+      <button class="btn btn-sn btn-light" (click)="addToBasket(food.FI)">+</button>
     </div>
   </div>
 </div>
@@ -26,7 +27,5 @@
     <h6>{{ restaurant.N }} <span class="badge badge-secondary" *ngFor="let catID of restaurant.RC">{{getRestaurantCategoryName(catID)}}</span>
       <span class="badge badge-pill badge-primary">{{restaurant.D}}km away</span>
     </h6>
-
-
   </div>
 </ng-template>
