@@ -31,6 +31,7 @@ export class CreateUserComponent implements OnInit {
         4: this.registerForm.get('LACTOSE_ALLERGY').value,
         5: this.registerForm.get('HIGH_LDL').value,
       },
+      CC: 1,
       IB: 3000
 
     };
