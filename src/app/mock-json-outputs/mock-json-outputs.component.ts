@@ -21,11 +21,9 @@ export class MockJsonOutputsComponent implements OnInit {
 
   public foods: FoodIngquiryResponse;
   public userID: string;
-  private foodsBackup: FoodIngquiryResponse;
-  private test: number;
-  private selectedFoodCategory: any;
-  private selectedNutrion: any;
-  private selectedRestaturantCat: any;
+  private selectedFoodCategory: any = '-';
+  private selectedNutrion: any = '-';
+  private selectedRestaturantCat: any = '-';
 
 
   constructor(private apiService: ApiService, private router: Router) {
@@ -50,6 +48,8 @@ export class MockJsonOutputsComponent implements OnInit {
 
   changeNutrition(event: any) {
     this.selectedNutrion = event.target.value;
+    console.log(event.target.value);
+    this.filterAll();
   }
 
   changeRestCat(event: any) {
@@ -74,8 +74,8 @@ export class MockJsonOutputsComponent implements OnInit {
   }
 
   private getUserID(): void {
-    // this.userID = history.state.userID;
-    this.userID = 'sgsag';
+    this.userID = history.state.userID;
+    // this.userID = 'sgsag';
   }
 
   private initFoodCategroy(): void {
@@ -125,32 +125,47 @@ export class MockJsonOutputsComponent implements OnInit {
 
     this.apiService.postFoodInquire(this.userID).subscribe(data => {
       if (this.selectedFoodCategory !== '-') {
-
         this.filterFoodCategory(data);
-
+        this.foods = data;
+      } else if (this.foods.F.length >= 1 && this.selectedNutrion !== '-') {
+        this.filterNutrition(data);
         this.foods = data;
       } else {
-      this.foods = data; }
+        this.foods = data;
+      }
     });
 
 
   }
 
   private filterFoodCategory(input: FoodIngquiryResponse): any {
-    const newOutput: FoodIngquiryResponse = Object.assign({}, input);
-
+    const indexItemsToBeDeleted: Array<number> = [];
     input.F.forEach((data, index) => {
-      console.log(data.FC.indexOf(this.selectedFoodCategory));
-      console.log(data.FC.includes(this.selectedFoodCategory));
-      if (!data.FC.indexOf(this.selectedFoodCategory)) {
+      if (!data.FC.includes(parseInt(this.selectedFoodCategory.toString()))) {
         console.log(data.FC);
-        newOutput.F.splice(index, 1);
-
+        indexItemsToBeDeleted.push(index);
       }
-
     });
+    for (var i = indexItemsToBeDeleted.length - 1; i >= 0; i--) {
+      input.F.splice(indexItemsToBeDeleted[i], 1);
+    }
+    return input;
+  }
 
-    return newOutput;
+
+  private filterNutrition(input: FoodIngquiryResponse): any {
+    const indexItemsToBeDeleted: Array<number> = [];
+    input.F.forEach((data, index) => {
+      console.log(this.selectedNutrion);
+      if (!Object.values(data.NF).includes(parseInt(this.selectedNutrion.toString()))) {
+        console.log(data.NF);
+        indexItemsToBeDeleted.push(index);
+      }
+    });
+    for (var i = indexItemsToBeDeleted.length - 1; i >= 0; i--) {
+      input.F.splice(indexItemsToBeDeleted[i], 1);
+    }
+    return input;
   }
 
 }
