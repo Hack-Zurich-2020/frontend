@@ -16,4 +16,6 @@ export class Food {
   IN: {};
   // FoodType
   FT: number;
+  // FoodScore
+  FS: number;
 }

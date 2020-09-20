@@ -5,4 +5,6 @@ export class Restaturant {
   D: string;
   //  list of restaurant category ids
   RC: [];
+  //  Restaurant score
+  RS: number;
 }

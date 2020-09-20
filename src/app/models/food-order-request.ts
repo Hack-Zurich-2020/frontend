@@ -1,9 +1,9 @@
-export class FoodInquiryRequest {
+export class FoodOrderRequest {
 
+  // Food IDs
+  FI: Array<number>;
   // User ID
   UI: string;
-  // Food Type
-  FT: number;
   // longitude
   LO: number;
   // latitude
